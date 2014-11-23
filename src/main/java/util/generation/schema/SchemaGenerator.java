@@ -4,6 +4,7 @@ import java.util.Random;
 import schema.Schema;
 import schema.Entity;
 import util.generation.entity.PoissonEntityGenerator;
+import util.generation.relationship.RandomRelationshipGenerator;
 import util.generation.relationship.RelationshipGenerator;
 import util.generation.entity.EntityGenerator;
 import util.generation.relationship.selfrelationship.ErdosRenyiGenerator;
@@ -42,7 +43,7 @@ public class SchemaGenerator {
     public static void main(String[]args){
         Schema mySchema;
         EntityGenerator myEnts = new PoissonEntityGenerator(4);
-        RelationshipGenerator myRels = new ErdosRenyiGenerator(0.3);
+        RelationshipGenerator myRels = new RandomRelationshipGenerator(0.3);
         try {
             mySchema = SchemaGenerator.generateSchema(100, 2, myEnts, myRels);
         }catch(Exception e){

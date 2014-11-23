@@ -9,15 +9,10 @@ import model.attribute.Attribute;
 import java.util.List;
 import java.util.ArrayList;
 
-enum Cardinality{
-    ONE,
-    MANY
-}
-
 /**
  * Created by darbour on 11/19/14.
  */
-public abstract class Relationship extends RelationalItem {
+public class Relationship extends RelationalItem {
     /* unique identifier */
     private String name;
     /* an adjacency matrix that contains the connections between the two entities */
@@ -49,6 +44,16 @@ public abstract class Relationship extends RelationalItem {
         out.add(row);
         out.add(column);
         return out;
+    }
+
+    /**
+     * Given the indices of two entity instances, create a relationship between them.
+     *
+     * @param from the index of one entity
+     * @param to the index of the other entity
+     */
+    public void addRelation(int from, int to){
+        this.setAdjacencyMatrixEntry(from, to, 1);
     }
 
     public OpenMapAdjacencyMatrix getAdjacencyMatrix(Entity from, Entity to) throws Exception {

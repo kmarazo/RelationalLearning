@@ -10,13 +10,5 @@ public class SelfRelationship extends Relationship {
         super(name, entity, entity, Cardinality.MANY, Cardinality.MANY);
     }
 
-    /**
-     * Given the indices of two entity instances, create a relationship between them.
-     *
-     * @param from the index of one entity
-     * @param to the index of the other entity
-     */
-    public void addRelation(int from, int to){
-        this.setAdjacencyMatrixEntry(from, to, 1);
-    }
+
 }
