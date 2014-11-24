@@ -1,7 +1,7 @@
 package model.attribute;
 
 import model.DataType;
-import model.Distribution;
+import model.distribution.Distribution;
 import schema.RelationalItem;
 
 /**
