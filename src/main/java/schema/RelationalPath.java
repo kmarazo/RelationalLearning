@@ -63,6 +63,36 @@ public class RelationalPath implements Iterable<RelationalPath.RelationalLink>{
     }
 
     /**
+     * Checks the validity of a given relational path
+     */
+    // todo: return T/F or throw Exception?
+    public boolean isValid(){
+        // Condition 1: Alternate entity - relations
+        // todo: This has been taken care by the constructor?
+
+        // Condition 2: No ERE patterns
+        Iterator<RelationalLink> it = this.relationshipLinks.iterator();
+        RelationalLink link;
+        while(it.hasNext()){
+            link = it.next();
+            if (link.from.equals(link.to)){
+                return false;
+            }
+        }
+        // Condition 3: If RER pattern, then E has cardinality many
+        // go over successive relational links
+        RelationalLink l1, l2;
+        for (int i=0;i<this.relationshipLinks.size()-1;i++){
+            l1 = this.relationshipLinks.get(i);
+            l2 = this.relationshipLinks.get(i+1);
+            if (l1.relationship.equals(l2.relationship) && l1.relationship.getCardinality(l1.to)==Cardinality.ONE){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Get the length of the relational path
      * @return
      */
