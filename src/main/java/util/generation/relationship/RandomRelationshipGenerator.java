@@ -22,11 +22,16 @@ public class RandomRelationshipGenerator implements RelationshipGenerator{
 
     @Override
     public Relationship generateRelationship(String name, Entity from, Entity to) throws Exception {
+        /* TODO: extend self-relationships to one-to-many and one-to-one*/
+        /* handle self relationships differently */
+        if(from.equals(to)){
+            return generateManyToManyRelationship(name, from, to, true);
+        }
         /* flip a coin to decide whether it's a one-to-one, one-to-many or many-to-many */
         switch(random.nextInt(3)){
             case 0: return generateOneToOneRelationship(name, from, to);
             case 1: return generateOneToManyRelationship(name, from, to);
-            case 2: return generateManyToManyRelationship(name, from, to);
+            case 2: return generateManyToManyRelationship(name, from, to, false);
             default: throw new Exception("Invalid relationship type drawn");
         }
     }
@@ -38,16 +43,19 @@ public class RandomRelationshipGenerator implements RelationshipGenerator{
      * @param to
      * @return
      */
-    public Relationship generateManyToManyRelationship(String name, Entity from, Entity to){
+    public Relationship generateManyToManyRelationship(String name, Entity from, Entity to,
+                                                       boolean isSelfRelationship){
         Relationship relationship = new Relationship(name, from, to, Cardinality.MANY, Cardinality.MANY);
         UniformRealDistribution runif = new UniformRealDistribution();
 
         for(int i = 0; i < from.getNumberOfInstances(); i++){
-            for(int j = 0; j < from.getNumberOfInstances(); j++){
+            for(int j = 0; j < to.getNumberOfInstances(); j++){
                 if(runif.sample() > this.linkingProbability){
-                    /* add in both directions */
                     relationship.addRelation(i, j);
-                    relationship.addRelation(j, i);
+                    /* add in both directions if it's a self relationship */
+                    if(isSelfRelationship){
+                        relationship.addRelation(j, i);
+                    }
                 }
             }
         }

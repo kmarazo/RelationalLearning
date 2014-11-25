@@ -18,6 +18,8 @@ public abstract class RelationalItem {
         this.attributes = new HashMap<String, Attribute>();
     }
 
+    public String getName() { return this.name; }
+
     @Override
     public String toString(){
         return this.name;

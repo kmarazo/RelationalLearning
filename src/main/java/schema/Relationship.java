@@ -46,10 +46,6 @@ public class Relationship extends RelationalItem {
         return out;
     }
 
-    public Cardinality getCardinality(Entity entity){
-        return this.cardinalities.get(entity);
-    }
-
     /**
      * Given the indices of two entity instances, create a relationship between them.
      *

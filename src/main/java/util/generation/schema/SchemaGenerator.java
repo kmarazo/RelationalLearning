@@ -28,8 +28,7 @@ public class SchemaGenerator {
             schema.addEntity(entityGenerator.generateEntity("Entity_"+i));
         }
         System.out.println("Generating relationships");
-        /* Generate Relationships */
-        /* TODO: include varying cardinalities */
+        /* Generate Relationships with random cardinalities */
         for(int i = 0; i < numberOfRelationships; i++){
             /* randomly select entities */
             Entity fromEntity = schema.getEntity(random.nextInt(numberOfEntities));
@@ -42,10 +41,11 @@ public class SchemaGenerator {
 
     public static void main(String[]args){
         Schema mySchema;
-        EntityGenerator myEnts = new PoissonEntityGenerator(4);
-        RelationshipGenerator myRels = new RandomRelationshipGenerator(0.3);
+        EntityGenerator myEnts = new PoissonEntityGenerator(5000);
+        RelationshipGenerator myRels = new RandomRelationshipGenerator(0.01);
         try {
-            mySchema = SchemaGenerator.generateSchema(100, 2, myEnts, myRels);
+            mySchema = SchemaGenerator.generateSchema(3, 6, myEnts, myRels);
+            System.out.println(mySchema);
         }catch(Exception e){
             System.out.println(e.toString());
         }

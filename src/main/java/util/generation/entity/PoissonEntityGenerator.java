@@ -16,7 +16,13 @@ public class PoissonEntityGenerator implements EntityGenerator{
 
     @Override
     public Entity generateEntity(String name) {
+        int numberOfEntities = distribution.sample();
+        /* truncate the distribution */
+        if(numberOfEntities == 0){
+            numberOfEntities = 1;
+        }
+        System.out.println(numberOfEntities);
         /* generate a new entity with the number of instances drawn from a Poisson */
-        return new Entity(name, distribution.sample());
+        return new Entity(name, numberOfEntities);
     }
 }

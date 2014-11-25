@@ -29,6 +29,18 @@ public class Schema {
 
     public Entity getEntity(int entityIndex) { return entities.get(entityIndex); }
 
+    public String toString(){
+        StringBuilder out = new StringBuilder();
+        /* print entities */
+        for(Entity e : this.entities){
+            out.append(e.toString()+"\n");
+        }
+        for(Relationship rel : this.relationships){
+            out.append(rel.toString() + "\n");
+        }
+        return out.toString();
+    }
+
     /**
      * Find all the items that are reachable along the path
      *
