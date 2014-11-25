@@ -6,5 +6,5 @@ import schema.Entity;
  * Created by darbour on 11/22/14.
  */
 public interface EntityGenerator {
-    public Entity generateEntity(String name);
+    public Entity generateEntity(String name) throws Exception;
 }

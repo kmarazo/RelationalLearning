@@ -15,7 +15,7 @@ public class PoissonEntityGenerator implements EntityGenerator{
     }
 
     @Override
-    public Entity generateEntity(String name) {
+    public Entity generateEntity(String name) throws Exception{
         int numberOfEntities = distribution.sample();
         /* truncate the distribution */
         if(numberOfEntities == 0){
