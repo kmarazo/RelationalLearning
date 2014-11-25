@@ -11,9 +11,15 @@ public class Entity extends RelationalItem {
     private List<Integer> entityInstances;
     private int numberOfInstances;
 
-    public Entity(String name, int numberOfInstances){
+    public Entity(String name, int numberOfInstances) throws Exception{
         super(name);
-        this.numberOfInstances = numberOfInstances;
+        if (numberOfInstances<=0){
+            throw new Exception("Number of Instances must be positive");
+        }
+        else{
+            this.numberOfInstances = numberOfInstances;
+        }
+
     }
 
     public int getNumberOfInstances(){
